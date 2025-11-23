@@ -1,0 +1,71 @@
+/* /* /* 1. This one line replaces the old @tailwind base/components/utilities 
+*/
+/* @import "tailwindcss"; */
+
+/* 2. This is the new v4 way to add your custom gradient.
+     Tailwind automatically creates the 'bg-radial-fade' utility from this.
+*/
+/* @theme {
+  --background-image-radial-fade: radial-gradient(at top right, #fce7f3 0%, #fdfdff 50%, #f0f9ff 100%);
+} */
+
+/* 3. Your body @apply rule is still correct and will work now.
+*/
+/* body {
+  @apply bg-radial-fade min-h-screen;
+} */
+ /* */ 
+
+
+
+/* src/index.css */
+@import "tailwindcss";
+
+@theme {
+  --background-image-radial-fade: radial-gradient(at top right, #fce7f3 0%, #fdfdff 50%, #f0f9ff 100%);
+
+  /* --- ADD THIS FOR THE BREATHING ANIMATION --- */
+  --animation-inhale: inhale 4s ease-in-out;
+  --animation-hold: hold 7s ease-in-out;
+  --animation-exhale: exhale 8s ease-in-out;
+
+  --keyframes-inhale: {
+    '0%': { transform: 'scale(0.8)' },
+    '100%': { transform: 'scale(1.2)' },
+  };
+  --keyframes-hold: {
+    '0%, 100%': { transform: 'scale(1.2)' },
+  };
+  --keyframes-exhale: {
+    '0%': { transform: 'scale(1.2)' },
+    '100%': { transform: 'scale(0.8)' },
+  };
+  /* --- END ANIMATION --- */
+}
+
+body {
+  @apply bg-radial-fade min-h-screen;
+}
+
+html {
+  /* 1. Force the scrollbar lane to always exist so layout doesn't jump */
+  overflow-y: scroll;
+  
+  /* 2. For Firefox: make it thin and transparent */
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+/* 3. For Chrome, Edge, Safari */
+html::-webkit-scrollbar {
+  width: 6px; /* Keeps the space reserved (you can adjust this width) */
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent; /* Invisible track */
+}
+
+html::-webkit-scrollbar-thumb {
+  background: transparent; /* Invisible thumb */
+}
+
